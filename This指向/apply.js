@@ -2,7 +2,7 @@ Function.prototype.apply2 = function (context) {
 	context = Object(context) || window;
 	context.fn = this;
 	let res;
-  let args = [...arguments][1];
+	let args = [...arguments][1];
 	if (args) {
 		res = context.fn(...args);
 	} else {
@@ -23,3 +23,5 @@ const getPerson = function (name, age) {
 };
 
 getPerson.apply2(Person, ["KangKang", 18]);
+
+

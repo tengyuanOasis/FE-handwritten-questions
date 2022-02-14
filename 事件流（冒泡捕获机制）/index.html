@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 500px;
+      height: 500px;
+      background-color: blue;
+    }
+
+    .box2 {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+
+    .box3 {
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1">box1
+    <div class="box2">box2
+      <div class="box3">box3</div>
+    </div>
+  </div>
+</body>
+
+<script>
+
+  const box1 = document.querySelector('.box1')
+  const box2 = document.querySelector('.box2')
+  const box3 = document.querySelector('.box3')
+
+  // 捕获
+  box1.addEventListener("click", function () { console.log("box1") }, true)
+  box2.addEventListener("click", function () { console.log("box2") }, true)
+  box3.addEventListener("click", function () { console.log("box3") }, true)
+
+  // 冒泡
+  // box1.addEventListener("click", function () { console.log("box1") }, false)
+  // box2.addEventListener("click", function () { console.log("box2") }, false)
+  // box3.addEventListener("click", function () { console.log("box3") }, false)
+
+</script>
+
+</html>
