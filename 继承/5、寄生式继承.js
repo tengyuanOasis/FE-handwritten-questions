@@ -26,3 +26,4 @@ function createAnother(original) {
 let person = { name: "Nicholas", friends: ["Shelby", "Court", "Van"] };
 let anotherPerson = createAnother(person);
 anotherPerson.sayHi(); // "hi"
+
