@@ -1,4 +1,5 @@
 Function.prototype.call2 = function (context) {
+	console.log('context: ', context);
 	context = Object(context) || window;
 	context.fn = this;
 	let args = [...arguments].slice(1);

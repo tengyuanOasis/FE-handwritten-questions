@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  没有防抖的Input <input type="text" class="unDebounce">
+  <br>
+  加入防抖的Input <input type="text" class="debounce">
+  <br>
+  加入节流的Input <input type="text" class="throttle">
+</body>
+<script src="https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js"></script>
+
+<script>
+  /**
+   *
+   * @param {*} fn 外部函数
+   * @param {*} delay	延时时间
+   * @return {function}
+   * @description n秒内重复触发时间重置
+   */
+  function debounce(fn, delay) {
+    let timer;
+    return function () {
+      let _this = this;
+      let _args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn.apply(_this, _args);
+      }, delay);
+    };
+  }
+
+  /**
+   *
+   * @param {*} fn
+   * @param {*} delay
+   * @return {function}
+   * @description n秒内只触发一次
+   */
+  function throttle(fn, delay) {
+    let timer,
+      lastTime = Date.now();
+    return function () {
+      let _this = this;
+      let _args = arguments;
+      let nowTime = Date.now();
+      let remainTime = delay - (nowTime - lastTime);
+      if (remainTime > 0) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          fn.apply(_args, _args);
+          lastTime = Date.now();;
+        }, remainTime);
+      } else {
+        fn.apply(_args, _args);
+        lastTime = Date.now();;
+      }
+    };
+  }
+
+
+  function ajax(params) {
+    console.log('ajax request : ' + params)
+  }
+
+  let debounce_ajax = debounce(ajax, 1000)
+
+  let throttle_ajax = throttle(ajax, 2000)
+
+  window.onload = function () {
+    // 没有防抖节流的Input
+    $('.unDebounce').on('input', function (e) {
+      ajax(e.target.value)
+    })
+    // 加入防抖的Input
+    $('.debounce').on('input', debounce(function (e) {
+      debounce_ajax(e.target.value)
+    }, 1000))
+    // 加入节流的Input
+    $('.throttle').on('input', throttle(function (e) {
+      throttle_ajax(e.target.value)
+    }, 1000))
+  }
+
+</script>
+
+</html>
