@@ -8,8 +8,7 @@
 // object()函数不是寄生式继承所必需的，任何返回新对象的函数都可以在这里使用。
 
 function createAnother(original) {
-	// Object() === new Object()
-	let clone = Object(original);
+	let clone = new Object(original);
 	// 通过调用函数创建一个新对象
 	clone.sayHi = function () {
 		// 以某种方式增强这个对象
@@ -26,4 +25,3 @@ function createAnother(original) {
 let person = { name: "Nicholas", friends: ["Shelby", "Court", "Van"] };
 let anotherPerson = createAnother(person);
 anotherPerson.sayHi(); // "hi"
-

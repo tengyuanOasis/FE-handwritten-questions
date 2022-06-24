@@ -18,6 +18,7 @@ class Promise {
 				this.onFulfilledCallbacks.forEach(fn => fn());
 			}
 		};
+		
 		let rejected = () => {
 			if (this.status === PENDING) {
 				this.status = REJECTED;

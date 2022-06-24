@@ -5,11 +5,13 @@
  */
 
 /**
- * 寄生式组合继承：基本思路是不通过调用父类构造函数给子类原型赋值，而是取得父类原型的一个副本。说到底就是使用寄生式继承来继承父类原型，然后将返回的新对象赋值给子类原型。
+ * 寄生式组合继承：
+ * 基本思路是不通过调用父类构造函数给子类原型赋值，而是取得父类原型的一个副本。
+ * 说到底就是使用寄生式继承来继承父类原型，然后将返回的新对象赋值给子类原型。
  */
 
 function inheritPrototype(subType, superType) {
-	let prototype = Object(superType.prototype); //创建对象
+	let prototype = new Object(superType.prototype); //创建对象
 	prototype.constructor = subType; // 增强对象
 	subType.prototype = prototype; // 赋值对象
 }

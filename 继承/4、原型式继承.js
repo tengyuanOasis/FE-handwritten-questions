@@ -3,7 +3,7 @@
  *
  */
 
-function object(o) {
+function myObject(o) {
 	function F() {}
 	F.prototype = o;
 	return new F();
@@ -13,24 +13,24 @@ function object(o) {
  * 这个object()函数会创建一个临时构造函数，将传入的对象赋值给这个构造函数的原型，然后返回这个临时类型的一个实例。本质上，object()是对传入的对象执行了一次浅复制。
  */
 
-let person = {
+let Person = {
 	name: "Nicholas",
 	friends: ["Shelby", "Court", "Van"]
 };
 
-let anotherPerson = object(person);
+let anotherPerson = myObject(Person);
 anotherPerson.name = "Greg";
 anotherPerson.friends.push("Rob");
 console.log("anotherPerson: ", anotherPerson.friends);
 //[ 'Shelby', 'Court', 'Van', 'Rob' ]
 
-let yetAnotherPerson = object(person);
+let yetAnotherPerson = myObject(Person);
 yetAnotherPerson.name = "Linda";
 yetAnotherPerson.friends.push("Barbie");
 console.log("yetAnotherPerson: ", yetAnotherPerson.friends);
 // [ 'Shelby', 'Court', 'Van', 'Rob', 'Barbie' ]
 
-console.log("person", person.friends);
+console.log("Person", Person.friends);
 // [ 'Shelby', 'Court', 'Van', 'Rob', 'Barbie' ]
 
 /**
@@ -53,6 +53,7 @@ anotherPerson.friends.push("Rob");
  * 每个新增属性都通过各自的描述符来描述。以这种方式添加的属性会遮蔽原型对象上的同名属性。比如：
  */
 
-let person = { name: "Nicholas", friends: ["Shelby", "Court", "Van"] };
-let anotherPerson = Object.create(person, { name: { value: "Greg" } });
+let person2 = { name: "Nicholas", friends: ["Shelby", "Court", "Van"] };
+let anotherPerson = Object.create(person2, { name: { value: "Greg" } });
+
 console.log(anotherPerson.name); // "Greg"
